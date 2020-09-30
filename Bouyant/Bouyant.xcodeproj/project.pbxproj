@@ -16,6 +16,7 @@
 		BB1F66172524D9BA00DA53E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB1F66152524D9BA00DA53E0 /* LaunchScreen.storyboard */; };
 		BB1F66222524D9BA00DA53E0 /* BouyantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66212524D9BA00DA53E0 /* BouyantTests.swift */; };
 		BB1F662D2524D9BB00DA53E0 /* BouyantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F662C2524D9BB00DA53E0 /* BouyantUITests.swift */; };
+		BB1F66422524F25D00DA53E0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66412524F25D00DA53E0 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		BB1F66282524D9BB00DA53E0 /* BouyantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BouyantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1F662C2524D9BB00DA53E0 /* BouyantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouyantUITests.swift; sourceTree = "<group>"; };
 		BB1F662E2524D9BB00DA53E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB1F66412524F25D00DA53E0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				BB1F66152524D9BA00DA53E0 /* LaunchScreen.storyboard */,
 				BB1F66182524D9BA00DA53E0 /* Info.plist */,
 				BB1F66102524D9B700DA53E0 /* Bouyant.xcdatamodeld */,
+				BB1F66412524F25D00DA53E0 /* CoreDataStack.swift */,
 			);
 			path = Bouyant;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB1F66422524F25D00DA53E0 /* CoreDataStack.swift in Sources */,
 				BB1F660C2524D9B700DA53E0 /* ViewController.swift in Sources */,
 				BB1F66082524D9B700DA53E0 /* AppDelegate.swift in Sources */,
 				BB1F66122524D9B700DA53E0 /* Bouyant.xcdatamodeld in Sources */,
