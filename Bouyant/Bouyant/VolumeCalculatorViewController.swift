@@ -6,31 +6,80 @@
 //
 
 import UIKit
-
-enum GuildFactor: Float {
-    case Beginner = 0.50
-    case BegInter = 0.46 // (0.49 - 0.43)
-    case Intermediate = 0.40 // (0.42 - 0.38)
-    case InterAdv = 0.37 // (0.38 - 0.36)
-    case Advanced = 0.35 // (0.36 - 0.34)
-}
+import CoreData
 
 class VolumeCalculatorViewController: UIViewController {
 
     // MARK: IBOutlets
+
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var levelPicker: UIPickerView!
     @IBOutlet weak var litersLabel: UILabel!
     @IBOutlet weak var weightSlider: UISlider!
 
+    // MARK: Properties
+
+    private let surferController = SurferController()
+
+    lazy var fetchedResultController: NSFetchedResultsController<Surfer> = {
+        let fetchRequest: NSFetchRequest<Surfer> = Surfer.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "weight", ascending: false)]
+                                        //NSSortDescriptor(key: "timestamp", ascending: false)]
+        let moc = CoreDataStack.shared.mainContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                             managedObjectContext: moc,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            print("Error fetching: \(error)")
+        }
+        return frc
+    }()
+
+    private var liters: Float = 0.0
+    var surfer: Surfer?
+
+
     override func viewDidLoad() {
-        levelPicker.delegate = self
-        levelPicker.dataSource = self
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        levelPicker.delegate = self
+        levelPicker.dataSource = self
+        updateViews()
     }
-    
+
+    private func updateViews() {
+        if let surfers = fetchedResultController.fetchedObjects,
+           surfers.count > 0 {
+            surfer = surfers[0]
+            weightTextField.text = String(surfer?.weight ?? 0.0)
+        }
+
+        litersLabel.text = String(format: "%.2f", liters)
+
+    }
+
+    // MARK: IBActions
+    @IBAction func calculateTapped(_ sender: Any) {
+        guard let weightText = weightTextField.text,
+              let weight = Float(weightText) else { return }
+
+        let index = levelPicker.selectedRow(inComponent: 0)
+        let guildFactor = GuildFactor.allCases[index]
+
+        if let surfer = surfer {
+            surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue)
+        } else {
+            surferController.create(weight: weight, guildFactor: guildFactor.rawValue)
+        }
+
+        liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue)
+        updateViews()
+    }
 
     /*
     // MARK: - Navigation
@@ -44,6 +93,7 @@ class VolumeCalculatorViewController: UIViewController {
 
 }
 
+// UIPicker DataSource/Delegate
 extension VolumeCalculatorViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -69,6 +119,9 @@ extension VolumeCalculatorViewController: UIPickerViewDataSource, UIPickerViewDe
             return ""
         }
     }
+}
 
+// NSFetchedResultsControllerDelegate
+extension VolumeCalculatorViewController: NSFetchedResultsControllerDelegate {
 
 }
