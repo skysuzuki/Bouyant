@@ -56,7 +56,11 @@ class VolumeCalculatorViewController: UIViewController {
         if let surfers = fetchedResultController.fetchedObjects,
            surfers.count > 0 {
             surfer = surfers[0]
-            weightTextField.text = String(surfer?.weight ?? 0.0)
+            if let surfer = surfer {
+                weightTextField.text = String(surfer.weight)
+                let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer.guildFactor) ?? GuildFactor.Beginner)
+                levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
+            }
         }
 
         litersLabel.text = String(format: "%.2f", liters)
