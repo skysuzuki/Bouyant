@@ -52,8 +52,11 @@
                                     <action selector="calculateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zuF-XW-g9n"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lxr-aH-S57">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="80" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="Lxr-aH-S57">
                                 <rect key="frame" x="18" y="355" width="378" height="31"/>
+                                <connections>
+                                    <action selector="updateWeight:" destination="BYZ-38-t0r" eventType="valueChanged" id="zPr-Vp-nxn"/>
+                                </connections>
                             </slider>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NR-dh-EdL">
                                 <rect key="frame" x="0.0" y="423" width="414" height="216"/>

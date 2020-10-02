@@ -24,7 +24,6 @@ class VolumeCalculatorViewController: UIViewController {
     lazy var fetchedResultController: NSFetchedResultsController<Surfer> = {
         let fetchRequest: NSFetchRequest<Surfer> = Surfer.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "weight", ascending: false)]
-                                        //NSSortDescriptor(key: "timestamp", ascending: false)]
         let moc = CoreDataStack.shared.mainContext
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                              managedObjectContext: moc,
@@ -40,7 +39,7 @@ class VolumeCalculatorViewController: UIViewController {
     }()
 
     private var liters: Float = 0.0
-    var surfer: Surfer?
+    private var surfer: Surfer?
 
 
     override func viewDidLoad() {
@@ -60,9 +59,9 @@ class VolumeCalculatorViewController: UIViewController {
                 weightTextField.text = String(surfer.weight)
                 let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer.guildFactor) ?? GuildFactor.Beginner)
                 levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
+                weightSlider.value = surfer.weight
             }
         }
-
         litersLabel.text = String(format: "%.2f", liters)
 
     }
@@ -85,6 +84,10 @@ class VolumeCalculatorViewController: UIViewController {
         updateViews()
     }
 
+    @IBAction func updateWeight(_ sender: UISlider) {
+        weightTextField.text = String(format: "%.2f", sender.value)
+    }
+
     /*
     // MARK: - Navigation
 
@@ -104,7 +107,7 @@ extension VolumeCalculatorViewController: UIPickerViewDataSource, UIPickerViewDe
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
+        return GuildFactor.allCases.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
