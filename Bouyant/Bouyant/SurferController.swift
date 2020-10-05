@@ -20,8 +20,8 @@ class SurferController {
 
     private let lbsToKgs: Float = 2.2
 
-    func create(weight: Float, guildFactor: Float) {
-        let _ = Surfer(weight: weight, guildFactor: guildFactor)
+    func create(weight: Float, guildFactor: Float, isLbs: Bool, liters: Float) {
+        let _ = Surfer(weight: weight, guildFactor: guildFactor, isLbs: isLbs, liters: liters)
         do {
             try CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
         } catch {
@@ -29,9 +29,11 @@ class SurferController {
         }
     }
 
-    func update(for surfer: Surfer, weight: Float, guildFactor: Float) {
+    func update(for surfer: Surfer, weight: Float, guildFactor: Float, isLbs: Bool, liters: Float) {
         surfer.weight = weight
         surfer.guildFactor = guildFactor
+        surfer.isLbs = isLbs
+        surfer.liters = liters
         do {
             try CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
         } catch {

@@ -2,9 +2,11 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Surfer" representedClassName="Surfer" syncable="YES" codeGenerationType="class">
         <attribute name="guildFactor" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isLbs" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="liters" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Surfer" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Surfer" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>

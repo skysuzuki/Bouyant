@@ -95,6 +95,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Volume Calculator" id="iuH-n2-STo"/>
                     <connections>
+                        <outlet property="lbskgsSegmentedControl" destination="Z5A-X6-sfx" id="v9C-FR-IvR"/>
                         <outlet property="levelPicker" destination="4NR-dh-EdL" id="eZW-dz-6Sk"/>
                         <outlet property="litersLabel" destination="C3l-PT-6Ag" id="Xup-pv-3fM"/>
                         <outlet property="weightLabel" destination="iNa-ha-La3" id="tSf-dI-HnC"/>
