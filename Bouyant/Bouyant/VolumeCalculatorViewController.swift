@@ -12,10 +12,11 @@ class VolumeCalculatorViewController: UIViewController {
 
     // MARK: IBOutlets
 
-    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var levelPicker: UIPickerView!
     @IBOutlet weak var litersLabel: UILabel!
     @IBOutlet weak var weightSlider: UISlider!
+    @IBOutlet weak var lbskgsSegmentedControl: UISegmentedControl!
 
     // MARK: Properties
 
@@ -40,6 +41,7 @@ class VolumeCalculatorViewController: UIViewController {
 
     private var liters: Float = 0.0
     private var surfer: Surfer?
+    private var isLbs = true
 
 
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ class VolumeCalculatorViewController: UIViewController {
            surfers.count > 0 {
             surfer = surfers[0]
             if let surfer = surfer {
-                weightTextField.text = String(surfer.weight)
+                weightLabel.text = String(surfer.weight)
                 let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer.guildFactor) ?? GuildFactor.Beginner)
                 levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
                 weightSlider.value = surfer.weight
@@ -68,7 +70,7 @@ class VolumeCalculatorViewController: UIViewController {
 
     // MARK: IBActions
     @IBAction func calculateTapped(_ sender: Any) {
-        guard let weightText = weightTextField.text,
+        guard let weightText = weightLabel.text,
               let weight = Float(weightText) else { return }
 
         let index = levelPicker.selectedRow(inComponent: 0)
@@ -80,12 +82,34 @@ class VolumeCalculatorViewController: UIViewController {
             surferController.create(weight: weight, guildFactor: guildFactor.rawValue)
         }
 
-        liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue)
+        liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
         updateViews()
     }
 
     @IBAction func updateWeight(_ sender: UISlider) {
-        weightTextField.text = String(format: "%.2f", sender.value)
+        weightLabel.text = String(format: "%.2f", sender.value)
+    }
+
+    @IBAction func convertWeight(_ sender: UISegmentedControl) {
+        var convertedWeight: Float = 0.0
+        if sender.selectedSegmentIndex == 0 {
+            guard let weightText = weightLabel.text,
+                  let weight = Float(weightText) else { return }
+            self.isLbs = true
+            convertedWeight = weight * 2.2
+            weightSlider.maximumValue *= 2.2
+            weightSlider.minimumValue *= 2.2
+            weightSlider.setValue(convertedWeight, animated: false)
+        } else if sender.selectedSegmentIndex == 1 {
+            guard let weightText = weightLabel.text,
+                  let weight = Float(weightText) else { return }
+            self.isLbs = false
+            convertedWeight = weight / 2.2
+            weightSlider.maximumValue /= 2.2
+            weightSlider.minimumValue /= 2.2
+            weightSlider.setValue(convertedWeight, animated: false)
+        }
+        weightLabel.text = String(format: "%.2f", convertedWeight)
     }
 
     /*
