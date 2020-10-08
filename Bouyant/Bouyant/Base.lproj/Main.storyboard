@@ -63,28 +63,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NR-dh-EdL">
-                                        <rect key="frame" x="0.0" y="21" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="375" height="216"/>
                                     </pickerView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WI-yj-ua0">
-                                <rect key="frame" x="155.5" y="595" width="64" height="30"/>
-                                <state key="normal" title="Calculate"/>
-                                <connections>
-                                    <action selector="calculateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zuF-XW-g9n"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qF5-uP-PTI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ExQ-2z-Q0m"/>
                             <constraint firstItem="Lxr-aH-S57" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-10" id="QlJ-KX-JyN"/>
-                            <constraint firstItem="6WI-yj-ua0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Tkd-h1-jGh"/>
                             <constraint firstItem="TP5-VV-5qV" firstAttribute="top" secondItem="C3l-PT-6Ag" secondAttribute="bottom" constant="30" id="Utl-n3-TJt"/>
                             <constraint firstItem="C3l-PT-6Ag" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XFU-zn-dau"/>
                             <constraint firstItem="qF5-uP-PTI" firstAttribute="top" secondItem="Lxr-aH-S57" secondAttribute="bottom" constant="10" id="Xmp-KK-e7Y"/>
-                            <constraint firstItem="6WI-yj-ua0" firstAttribute="top" secondItem="qF5-uP-PTI" secondAttribute="bottom" constant="10" id="Y8e-Iq-GVh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qF5-uP-PTI" secondAttribute="trailing" id="YEC-f0-Jgd"/>
                             <constraint firstItem="Lxr-aH-S57" firstAttribute="top" secondItem="TP5-VV-5qV" secondAttribute="bottom" constant="20" id="b9l-wi-7wk"/>
                             <constraint firstItem="TP5-VV-5qV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="50" id="eOH-cG-7Dz"/>

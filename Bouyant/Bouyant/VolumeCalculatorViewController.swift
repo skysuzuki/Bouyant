@@ -42,6 +42,7 @@ class VolumeCalculatorViewController: UIViewController {
     private var liters: Float = 0.0
     private var surfer: Surfer?
     private var isLbs = true
+    private var calculateButton = UIButton()
 
 
     override func viewDidLoad() {
@@ -51,6 +52,7 @@ class VolumeCalculatorViewController: UIViewController {
         levelPicker.delegate = self
         levelPicker.dataSource = self
         updateViews()
+        setUpSubViews()
     }
 
     private func updateViews() {
@@ -74,8 +76,22 @@ class VolumeCalculatorViewController: UIViewController {
 
     }
 
-    // MARK: IBActions
-    @IBAction func calculateTapped(_ sender: Any) {
+    private func setUpSubViews() {
+        view.addSubview(calculateButton)
+        calculateButton.setTitle("Calculate", for: .normal)
+        calculateButton.setTitleColor(.systemBlue, for: .normal)
+        calculateButton.addTarget(self, action: #selector(calculate), for: .touchUpInside)
+        calculateButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            calculateButton.topAnchor.constraint(equalTo: levelPicker.bottomAnchor, constant: 20),
+            calculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            calculateButton.heightAnchor.constraint(equalToConstant: 50),
+            calculateButton.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+
+    @objc private func calculate(sender: UIButton) {
         guard let weightText = weightLabel.text,
               let weight = Float(weightText) else { return }
 
@@ -92,6 +108,8 @@ class VolumeCalculatorViewController: UIViewController {
 
         updateViews()
     }
+
+    // MARK: IBActions
 
     @IBAction func updateWeight(_ sender: UISlider) {
         weightLabel.text = String(format: "%.2f", sender.value)
