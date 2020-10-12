@@ -40,8 +40,14 @@ class VolumeCalculatorViewController: UIViewController {
     }()
 
     private var liters: Float = 0.0
-    private var surfer: Surfer?
-    private var isLbs = true
+    private var surfer: Surfer? {
+        didSet {
+            updateSurferViews()
+        }
+    }
+
+    private var surfboard: Surfboard?
+    private var isLbs: Bool?
     private var calculateButton = UIButton()
 
 
@@ -59,21 +65,23 @@ class VolumeCalculatorViewController: UIViewController {
         if let surfers = fetchedResultController.fetchedObjects,
            surfers.count > 0 {
             surfer = surfers[0]
-            if let surfer = surfer {
-                liters = surfer.liters
-                if !surfer.isLbs {
-                    lbskgsSegmentedControl.selectedSegmentIndex = 1
-                    weightSlider.maximumValue /= 2.2
-                    weightSlider.minimumValue /= 2.2
-                }
-                weightLabel.text = String(surfer.weight)
-                let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer.guildFactor) ?? GuildFactor.Beginner)
-                levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
-                weightSlider.value = surfer.weight
-            }
+        } else {
+            surfer = surferController.create(weight: 80.0, guildFactor: GuildFactor.Beginner.rawValue, isLbs: true)
         }
         litersLabel.text = String(format: "%.2f", liters)
+    }
 
+    private func updateSurferViews() {
+        self.isLbs = surfer!.isLbs
+        if !surfer!.isLbs && lbskgsSegmentedControl.selectedSegmentIndex != 1 {
+            lbskgsSegmentedControl.selectedSegmentIndex = 1
+            weightSlider.maximumValue /= 2.2
+            weightSlider.minimumValue /= 2.2
+        }
+        weightLabel.text = String(surfer!.weight)
+        let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer!.guildFactor) ?? GuildFactor.Beginner)
+        levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
+        weightSlider.value = surfer!.weight
     }
 
     private func setUpSubViews() {
@@ -93,18 +101,16 @@ class VolumeCalculatorViewController: UIViewController {
 
     @objc private func calculate(sender: UIButton) {
         guard let weightText = weightLabel.text,
-              let weight = Float(weightText) else { return }
+              let weight = Float(weightText),
+              let isLbs = isLbs,
+              let surfer = surfer else { return }
 
         let index = levelPicker.selectedRow(inComponent: 0)
         let guildFactor = GuildFactor.allCases[index]
 
         liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
 
-        if let surfer = surfer {
-            surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs, liters: liters)
-        } else {
-            surferController.create(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs, liters: liters)
-        }
+        surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
 
         updateViews()
     }

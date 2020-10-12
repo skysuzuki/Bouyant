@@ -19,6 +19,7 @@
 		BB1F66472525003700DA53E0 /* SurferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66462525003700DA53E0 /* SurferController.swift */; };
 		BB1F664F252509CD00DA53E0 /* VolumeCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */; };
 		BB1F66542526413300DA53E0 /* Surfer+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66532526413300DA53E0 /* Surfer+Convenience.swift */; };
+		BB1F66632534E66300DA53E0 /* Surfboard+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66622534E66200DA53E0 /* Surfboard+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BB1F66462525003700DA53E0 /* SurferController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurferController.swift; sourceTree = "<group>"; };
 		BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCalculatorViewController.swift; sourceTree = "<group>"; };
 		BB1F66532526413300DA53E0 /* Surfer+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Surfer+Convenience.swift"; sourceTree = "<group>"; };
+		BB1F66622534E66200DA53E0 /* Surfboard+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Surfboard+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +111,9 @@
 			children = (
 				BB1F66602534C16500DA53E0 /* Model */,
 				BB1F66612534C17F00DA53E0 /* View Controllers */,
+				BB1F666A2534EBB900DA53E0 /* Model Controllers */,
 				BB1F66072524D9B700DA53E0 /* AppDelegate.swift */,
 				BB1F66092524D9B700DA53E0 /* SceneDelegate.swift */,
-				BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */,
 				BB1F660D2524D9B700DA53E0 /* Main.storyboard */,
 				BB1F66132524D9BA00DA53E0 /* Assets.xcassets */,
 				BB1F66152524D9BA00DA53E0 /* LaunchScreen.storyboard */,
@@ -144,6 +146,7 @@
 				BB1F66102524D9B700DA53E0 /* Bouyant.xcdatamodeld */,
 				BB1F66532526413300DA53E0 /* Surfer+Convenience.swift */,
 				BB1F66412524F25D00DA53E0 /* CoreDataStack.swift */,
+				BB1F66622534E66200DA53E0 /* Surfboard+Convenience.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,9 +154,17 @@
 		BB1F66612534C17F00DA53E0 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BB1F66462525003700DA53E0 /* SurferController.swift */,
+				BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BB1F666A2534EBB900DA53E0 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB1F66462525003700DA53E0 /* SurferController.swift */,
+			);
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +303,7 @@
 				BB1F66472525003700DA53E0 /* SurferController.swift in Sources */,
 				BB1F664F252509CD00DA53E0 /* VolumeCalculatorViewController.swift in Sources */,
 				BB1F660A2524D9B700DA53E0 /* SceneDelegate.swift in Sources */,
+				BB1F66632534E66300DA53E0 /* Surfboard+Convenience.swift in Sources */,
 				BB1F66542526413300DA53E0 /* Surfer+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,12 +13,10 @@ extension Surfer {
     convenience init(weight: Float,
                      guildFactor: Float,
                      isLbs: Bool = true,
-                     liters: Float,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.weight = weight
         self.guildFactor = guildFactor
         self.isLbs = isLbs
-        self.liters = liters
     }
 }
