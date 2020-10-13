@@ -21,10 +21,21 @@ class VolumeCalculatorViewController: UIViewController {
     // MARK: Properties
 
     private let surferController = SurferController()
+    //private var liters: Float = 0.0
+    private var surfer: Surfer? {
+        didSet {
+            updateSurferViews()
+        }
+    }
+
+    private var surfboard: Surfboard?
+    private var isLbs: Bool?
+    private var calculateButton = UIButton()
 
     lazy var fetchedResultController: NSFetchedResultsController<Surfer> = {
         let fetchRequest: NSFetchRequest<Surfer> = Surfer.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "weight", ascending: false)]
+        
         let moc = CoreDataStack.shared.mainContext
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                              managedObjectContext: moc,
@@ -38,18 +49,6 @@ class VolumeCalculatorViewController: UIViewController {
         }
         return frc
     }()
-
-    private var liters: Float = 0.0
-    private var surfer: Surfer? {
-        didSet {
-            updateSurferViews()
-        }
-    }
-
-    private var surfboard: Surfboard?
-    private var isLbs: Bool?
-    private var calculateButton = UIButton()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,10 +64,11 @@ class VolumeCalculatorViewController: UIViewController {
         if let surfers = fetchedResultController.fetchedObjects,
            surfers.count > 0 {
             surfer = surfers[0]
+            surfboard = surfer?.surfboard
         } else {
             surfer = surferController.create(weight: 80.0, guildFactor: GuildFactor.Beginner.rawValue, isLbs: true)
         }
-        litersLabel.text = String(format: "%.2f", liters)
+        litersLabel.text = String(format: "%.2f", surfboard?.liters ?? 0.0)
     }
 
     private func updateSurferViews() {
@@ -108,7 +108,14 @@ class VolumeCalculatorViewController: UIViewController {
         let index = levelPicker.selectedRow(inComponent: 0)
         let guildFactor = GuildFactor.allCases[index]
 
-        liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
+        let liters = guildFactor.rawValue * (isLbs ? (weight / 2.2) : weight)
+
+        if let surfboard = surfboard {
+            surferController.updateSurfboard(for: surfboard, liters: liters)
+        } else {
+            surfboard = surferController.createSurfboard(liters: liters, surfer: surfer)
+        }
+        //liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
 
         surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
 
@@ -185,5 +192,7 @@ extension VolumeCalculatorViewController: UIPickerViewDataSource, UIPickerViewDe
 
 // NSFetchedResultsControllerDelegate
 extension VolumeCalculatorViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 
+    }
 }

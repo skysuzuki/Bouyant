@@ -10,9 +10,12 @@ import CoreData
 
 extension Surfboard {
 
-    @discardableResult convenience init(liters: Float,
-                                        context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(liters: Float,
+                     in surfer: Surfer,
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.liters = liters
+
+        self.surfer = surfer
     }
 }
