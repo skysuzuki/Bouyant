@@ -10,24 +10,34 @@ import XCTest
 
 class BouyantTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    // Test Creating a surfer and updating it
+    func testUpdateSurfer() {
+        let surfboardController = SurferController()
+        let surfer = surfboardController.create(weight: 100.0, guildFactor: GuildFactor.Intermediate.rawValue, isLbs: false)
+
+        XCTAssertFalse(surfer.isLbs)
+        XCTAssertEqual(surfer.weight, 100.0)
+        XCTAssertEqual(surfer.guildFactor, GuildFactor.Intermediate.rawValue)
+
+        surfboardController.update(for: surfer, weight: 200.0, guildFactor: GuildFactor.Advanced.rawValue, isLbs: true)
+
+        XCTAssertTrue(surfer.isLbs)
+        XCTAssertEqual(surfer.weight, 200.0)
+        XCTAssertEqual(surfer.guildFactor, GuildFactor.Advanced.rawValue)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    // Test creating a surfer, creating a surfboard, updating the surfboard
+    func testUpdateSurfboard() {
+        let surfboardController = SurferController()
+        let surfer = surfboardController.create(weight: 100.0, guildFactor: GuildFactor.Intermediate.rawValue, isLbs: false)
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        let surfboard = surfboardController.createSurfboard(liters: 20.0, surfer: surfer)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+        XCTAssertEqual(surfboard.liters, 20.0)
+        XCTAssertEqual(surfboard.surfer, surfer)
 
+        surfboardController.updateSurfboard(for: surfboard, liters: 40.0)
+
+        XCTAssertEqual(surfboard.liters, 40.0)
+    }
 }
