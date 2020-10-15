@@ -19,6 +19,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3l-PT-6Ag">
                                 <rect key="frame" x="140.5" y="179.5" width="94.5" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="LitersLabel"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -28,6 +29,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNa-ha-La3">
                                         <rect key="frame" x="0.0" y="0.0" width="15.5" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="WeightLabel"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -64,6 +66,9 @@
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NR-dh-EdL">
                                         <rect key="frame" x="0.0" y="20.5" width="375" height="216"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="SkillPicker">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                     </pickerView>
                                 </subviews>
                             </stackView>

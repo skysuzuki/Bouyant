@@ -56,6 +56,7 @@ class VolumeCalculatorViewController: UIViewController {
         // Do any additional setup after loading the view.
         levelPicker.delegate = self
         levelPicker.dataSource = self
+        lbskgsSegmentedControl.accessibilityIdentifier = "WeightSegmentedControl"
         updateViews()
         setUpSubViews()
     }
