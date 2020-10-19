@@ -23,24 +23,39 @@ class BouyantUITests: XCTestCase {
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
-
+    // Testing picking the skill level
     func testLevelPicker() {
         let levelPicker = app.pickerWheels["Advanced"]
-        levelPicker.swipeDown()
-
-        XCTAssert(app.pickerWheels["Beginner"].exists)
+        //levelPicker.swipeDown()
+        levelPicker.adjust(toPickerWheelValue: "Intermediate")
+        XCTAssert(app.pickerWheels["Intermediate"].exists)
     }
 
+    // Testing the conversion from lbs to kgs and the label matching
     func testLbsToKgs() {
         let segmentedControl = app.segmentedControls["WeightSegmentedControl"]
         XCTAssert(segmentedControl.exists)
 
-        let kgsSegmentedButton = app.buttons["kgs"]
+        let kgsSegmentedButton = segmentedControl.buttons["kgs"]
         kgsSegmentedButton.tap()
 
         let weightLabel = app.staticTexts["WeightLabel"]
         let kgsLabel = String(format: "%.2f", 200.0 / 2.2)
         XCTAssertEqual(weightLabel.label, kgsLabel)
+    }
+
+    // Test pressing the calculate button
+    func testCalculate() {
+        let calculateButton = app.buttons["CalculateButton"]
+        XCTAssert(calculateButton.exists)
+
+        calculateButton.tap()
+
+        let litersLabel = app.staticTexts["LitersLabel"]
+
+        let litersCalculate = String(format: "%.2f", 0.35 * (200.0 / 2.2))
+
+        XCTAssertEqual(litersLabel.label, litersCalculate)
     }
 
     func testLaunchPerformance() throws {

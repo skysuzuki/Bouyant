@@ -89,6 +89,7 @@ class VolumeCalculatorViewController: UIViewController {
         view.addSubview(calculateButton)
         calculateButton.setTitle("Calculate", for: .normal)
         calculateButton.setTitleColor(.systemBlue, for: .normal)
+        calculateButton.accessibilityIdentifier = "CalculateButton"
         calculateButton.addTarget(self, action: #selector(calculate), for: .touchUpInside)
         calculateButton.translatesAutoresizingMaskIntoConstraints = false
 
