@@ -89,7 +89,13 @@
                             <constraint firstItem="Lxr-aH-S57" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xJ8-fX-TQR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Volume Calculator" id="iuH-n2-STo"/>
+                    <navigationItem key="navigationItem" title="Volume Calculator" id="iuH-n2-STo">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="info.circle" catalog="system" id="n1P-TE-VGC">
+                            <connections>
+                                <segue destination="q7u-s8-z59" kind="presentation" id="AqR-J5-EFB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lbskgsSegmentedControl" destination="Z5A-X6-sfx" id="v9C-FR-IvR"/>
                         <outlet property="levelPicker" destination="4NR-dh-EdL" id="eZW-dz-6Sk"/>
@@ -101,6 +107,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="730.43478260869574" y="56.919642857142854"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9ll-sn-vU6">
+            <objects>
+                <viewController id="q7u-s8-z59" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sfz-ES-RAP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Info for Volume calculator goes here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nbb-z3-txE">
+                                <rect key="frame" x="67" y="218" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ghR-l3-kzS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7au-OM-qET" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462" y="54"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vj2-IF-naS">
@@ -122,6 +153,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
