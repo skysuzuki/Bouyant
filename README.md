@@ -1,2 +1,9 @@
 # Bouyant
-Calculate the right liters for surfboard of your skill level
+
+## Project Overview
+
+Allow surfers to calculate the approximate liters for a surfboard of their skill level
+
+### Tech stack
+- Swift
+- Core Data
