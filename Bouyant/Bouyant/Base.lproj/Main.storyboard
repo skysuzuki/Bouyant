@@ -163,7 +163,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="n2Y-3f-Hh7" kind="presentation" identifier="WeightSegue" trigger="accessoryAction" id="qKS-yY-Ejj"/>
+                                            <segue destination="DwJ-Gu-63c" kind="showDetail" identifier="WeightPickerSegue" id="SFZ-23-dap"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SkillCell" textLabel="PyU-Tv-QsO" detailTextLabel="4gg-1K-CcC" style="IBUITableViewCellStyleValue1" id="5zE-PR-Zr8">
@@ -224,20 +224,45 @@
             </objects>
             <point key="canvasLocation" x="728.79999999999995" y="749.7751124437782"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="jsk-Iy-pdP">
+        <!--Weight Picker View Controller-->
+        <scene sceneID="1zz-YA-FhA">
             <objects>
-                <viewController id="n2Y-3f-Hh7" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1zS-F0-aBF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                <viewController id="DwJ-Gu-63c" customClass="WeightPickerViewController" customModule="Bouyant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NfL-4H-cVb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="h2x-ge-weI"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJG-tO-V2W">
+                                <rect key="frame" x="28" y="119" width="320" height="162"/>
+                            </pickerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTg-9L-jfd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="8UB-HS-x19">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="f3R-8Z-EVL"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="e59-ml-Mdc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BTg-9L-jfd" firstAttribute="leading" secondItem="e59-ml-Mdc" secondAttribute="leading" id="6vF-yb-Dd5"/>
+                            <constraint firstItem="AJG-tO-V2W" firstAttribute="centerY" secondItem="NfL-4H-cVb" secondAttribute="centerY" id="9SP-bN-ioX"/>
+                            <constraint firstItem="AJG-tO-V2W" firstAttribute="centerX" secondItem="NfL-4H-cVb" secondAttribute="centerX" id="K1E-gC-7Mk"/>
+                            <constraint firstItem="BTg-9L-jfd" firstAttribute="top" secondItem="e59-ml-Mdc" secondAttribute="top" id="N1H-Pa-l3o"/>
+                            <constraint firstAttribute="trailing" secondItem="BTg-9L-jfd" secondAttribute="trailing" id="kzk-cY-Dza"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="KHL-xd-Vt8"/>
+                    <size key="freeformSize" width="375" height="400"/>
+                    <connections>
+                        <outlet property="weightPicker" destination="AJG-tO-V2W" id="Nto-cT-95U"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VlR-5c-kkX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BLM-Th-pUi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1607" y="750"/>
+            <point key="canvasLocation" x="1503" y="750"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9ll-sn-vU6">

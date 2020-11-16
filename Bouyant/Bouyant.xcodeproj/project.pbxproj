@@ -20,6 +20,9 @@
 		BB1F664F252509CD00DA53E0 /* VolumeCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */; };
 		BB1F66542526413300DA53E0 /* Surfer+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66532526413300DA53E0 /* Surfer+Convenience.swift */; };
 		BB1F66632534E66300DA53E0 /* Surfboard+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66622534E66200DA53E0 /* Surfboard+Convenience.swift */; };
+		BB1F66DB2563280C00DA53E0 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66DA2563280C00DA53E0 /* SlideInPresentationManager.swift */; };
+		BB1F66E02563303300DA53E0 /* WeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66DF2563303300DA53E0 /* WeightPickerViewController.swift */; };
+		BB1F66E52563317400DA53E0 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66E42563317400DA53E0 /* SlideInPresentationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeCalculatorViewController.swift; sourceTree = "<group>"; };
 		BB1F66532526413300DA53E0 /* Surfer+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Surfer+Convenience.swift"; sourceTree = "<group>"; };
 		BB1F66622534E66200DA53E0 /* Surfboard+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Surfboard+Convenience.swift"; sourceTree = "<group>"; };
+		BB1F66DA2563280C00DA53E0 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
+		BB1F66DF2563303300DA53E0 /* WeightPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPickerViewController.swift; sourceTree = "<group>"; };
+		BB1F66E42563317400DA53E0 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 				BB1F66132524D9BA00DA53E0 /* Assets.xcassets */,
 				BB1F66152524D9BA00DA53E0 /* LaunchScreen.storyboard */,
 				BB1F66182524D9BA00DA53E0 /* Info.plist */,
+				BB1F66E92563317C00DA53E0 /* Presentation */,
 			);
 			path = Bouyant;
 			sourceTree = "<group>";
@@ -155,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */,
+				BB1F66DF2563303300DA53E0 /* WeightPickerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -165,6 +173,15 @@
 				BB1F66462525003700DA53E0 /* SurferController.swift */,
 			);
 			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		BB1F66E92563317C00DA53E0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BB1F66E42563317400DA53E0 /* SlideInPresentationController.swift */,
+				BB1F66DA2563280C00DA53E0 /* SlideInPresentationManager.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,13 +315,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB1F66422524F25D00DA53E0 /* CoreDataStack.swift in Sources */,
+				BB1F66DB2563280C00DA53E0 /* SlideInPresentationManager.swift in Sources */,
 				BB1F66082524D9B700DA53E0 /* AppDelegate.swift in Sources */,
 				BB1F66122524D9B700DA53E0 /* Bouyant.xcdatamodeld in Sources */,
 				BB1F66472525003700DA53E0 /* SurferController.swift in Sources */,
 				BB1F664F252509CD00DA53E0 /* VolumeCalculatorViewController.swift in Sources */,
 				BB1F660A2524D9B700DA53E0 /* SceneDelegate.swift in Sources */,
 				BB1F66632534E66300DA53E0 /* Surfboard+Convenience.swift in Sources */,
+				BB1F66E02563303300DA53E0 /* WeightPickerViewController.swift in Sources */,
 				BB1F66542526413300DA53E0 /* Surfer+Convenience.swift in Sources */,
+				BB1F66E52563317400DA53E0 /* SlideInPresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

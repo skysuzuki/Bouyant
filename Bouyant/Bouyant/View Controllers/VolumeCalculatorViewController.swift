@@ -22,6 +22,7 @@ class VolumeCalculatorViewController: UIViewController {
     // MARK: Properties
 
     private let surferController = SurferController()
+    lazy var slideInTransistionDelegate = SlideInPresentationManager()
     //private var liters: Float = 0.0
     private var surfer: Surfer? {
         didSet {
@@ -157,15 +158,20 @@ class VolumeCalculatorViewController: UIViewController {
 //        weightLabel.text = String(format: "%.2f", convertedWeight)
     }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? WeightPickerViewController {
+            if segue.identifier == "WeightPickerSegue" {
+                slideInTransistionDelegate.direction = .bottom
+            }
+
+            destination.transitioningDelegate = slideInTransistionDelegate
+            destination.modalPresentationStyle = .custom
+        }
     }
-    */
 
 }
 
