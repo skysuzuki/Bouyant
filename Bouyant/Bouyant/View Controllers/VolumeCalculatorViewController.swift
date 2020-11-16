@@ -12,11 +12,12 @@ class VolumeCalculatorViewController: UIViewController {
 
     // MARK: IBOutlets
 
-    @IBOutlet weak var weightLabel: UILabel!
-    @IBOutlet weak var levelPicker: UIPickerView!
+//    @IBOutlet weak var weightLabel: UILabel!
+//    @IBOutlet weak var levelPicker: UIPickerView!
     @IBOutlet weak var litersLabel: UILabel!
-    @IBOutlet weak var weightSlider: UISlider!
-    @IBOutlet weak var lbskgsSegmentedControl: UISegmentedControl!
+//    @IBOutlet weak var weightSlider: UISlider!
+//    @IBOutlet weak var lbskgsSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var informationTableView: UITableView!
 
     // MARK: Properties
 
@@ -54,9 +55,13 @@ class VolumeCalculatorViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        levelPicker.delegate = self
-        levelPicker.dataSource = self
-        lbskgsSegmentedControl.accessibilityIdentifier = "WeightSegmentedControl"
+        informationTableView.delegate = self
+        informationTableView.dataSource = self
+        informationTableView.isScrollEnabled = false
+        informationTableView.tableFooterView = UIView()
+//        levelPicker.delegate = self
+//        levelPicker.dataSource = self
+//        lbskgsSegmentedControl.accessibilityIdentifier = "WeightSegmentedControl"
         updateViews()
         setUpSubViews()
     }
@@ -74,15 +79,15 @@ class VolumeCalculatorViewController: UIViewController {
 
     private func updateSurferViews() {
         self.isLbs = surfer!.isLbs
-        if !surfer!.isLbs && lbskgsSegmentedControl.selectedSegmentIndex != 1 {
-            lbskgsSegmentedControl.selectedSegmentIndex = 1
-            weightSlider.maximumValue /= 2.2
-            weightSlider.minimumValue /= 2.2
-        }
-        weightLabel.text = String(surfer!.weight)
-        let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer!.guildFactor) ?? GuildFactor.Beginner)
-        levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
-        weightSlider.value = surfer!.weight
+//        if !surfer!.isLbs && lbskgsSegmentedControl.selectedSegmentIndex != 1 {
+//            lbskgsSegmentedControl.selectedSegmentIndex = 1
+//            weightSlider.maximumValue /= 2.2
+//            weightSlider.minimumValue /= 2.2
+//        }
+//        weightLabel.text = String(surfer!.weight)
+//        let index = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer!.guildFactor) ?? GuildFactor.Beginner)
+//        levelPicker.selectRow(index ?? 0, inComponent: 0, animated: false)
+//        weightSlider.value = surfer!.weight
     }
 
     private func setUpSubViews() {
@@ -93,33 +98,33 @@ class VolumeCalculatorViewController: UIViewController {
         calculateButton.addTarget(self, action: #selector(calculate), for: .touchUpInside)
         calculateButton.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            calculateButton.topAnchor.constraint(equalTo: levelPicker.bottomAnchor, constant: 20),
-            calculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            calculateButton.heightAnchor.constraint(equalToConstant: 50),
-            calculateButton.widthAnchor.constraint(equalToConstant: 100)
-        ])
+//        NSLayoutConstraint.activate([
+//            calculateButton.topAnchor.constraint(equalTo: levelPicker.bottomAnchor, constant: 20),
+//            calculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            calculateButton.heightAnchor.constraint(equalToConstant: 50),
+//            calculateButton.widthAnchor.constraint(equalToConstant: 100)
+//        ])
     }
 
     @objc private func calculate(sender: UIButton) {
-        guard let weightText = weightLabel.text,
-              let weight = Float(weightText),
-              let isLbs = isLbs,
-              let surfer = surfer else { return }
-
-        let index = levelPicker.selectedRow(inComponent: 0)
-        let guildFactor = GuildFactor.allCases[index]
-
-        let liters = guildFactor.rawValue * (isLbs ? (weight / 2.2) : weight)
-
-        if let surfboard = surfboard {
-            surferController.updateSurfboard(for: surfboard, liters: liters)
-        } else {
-            surfboard = surferController.createSurfboard(liters: liters, surfer: surfer)
-        }
-        //liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
-
-        surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
+//        guard let weightText = weightLabel.text,
+//              let weight = Float(weightText),
+//              let isLbs = isLbs,
+//              let surfer = surfer else { return }
+//
+//        let index = levelPicker.selectedRow(inComponent: 0)
+//        let guildFactor = GuildFactor.allCases[index]
+//
+//        let liters = guildFactor.rawValue * (isLbs ? (weight / 2.2) : weight)
+//
+//        if let surfboard = surfboard {
+//            surferController.updateSurfboard(for: surfboard, liters: liters)
+//        } else {
+//            surfboard = surferController.createSurfboard(liters: liters, surfer: surfer)
+//        }
+//        //liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
+//
+//        surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
 
         updateViews()
     }
@@ -127,29 +132,29 @@ class VolumeCalculatorViewController: UIViewController {
     // MARK: IBActions
 
     @IBAction func updateWeight(_ sender: UISlider) {
-        weightLabel.text = String(format: "%.2f", sender.value)
+        //weightLabel.text = String(format: "%.2f", sender.value)
     }
 
     @IBAction func convertWeight(_ sender: UISegmentedControl) {
         var convertedWeight: Float = 0.0
-        if sender.selectedSegmentIndex == 0 {
-            guard let weightText = weightLabel.text,
-                  let weight = Float(weightText) else { return }
-            self.isLbs = true
-            convertedWeight = weight * 2.2
-            weightSlider.maximumValue *= 2.2
-            weightSlider.minimumValue *= 2.2
-            weightSlider.setValue(convertedWeight, animated: false)
-        } else if sender.selectedSegmentIndex == 1 {
-            guard let weightText = weightLabel.text,
-                  let weight = Float(weightText) else { return }
-            self.isLbs = false
-            convertedWeight = weight / 2.2
-            weightSlider.maximumValue /= 2.2
-            weightSlider.minimumValue /= 2.2
-            weightSlider.setValue(convertedWeight, animated: false)
-        }
-        weightLabel.text = String(format: "%.2f", convertedWeight)
+//        if sender.selectedSegmentIndex == 0 {
+//            guard let weightText = weightLabel.text,
+//                  let weight = Float(weightText) else { return }
+//            self.isLbs = true
+//            convertedWeight = weight * 2.2
+//            weightSlider.maximumValue *= 2.2
+//            weightSlider.minimumValue *= 2.2
+//            weightSlider.setValue(convertedWeight, animated: false)
+//        } else if sender.selectedSegmentIndex == 1 {
+//            guard let weightText = weightLabel.text,
+//                  let weight = Float(weightText) else { return }
+//            self.isLbs = false
+//            convertedWeight = weight / 2.2
+//            weightSlider.maximumValue /= 2.2
+//            weightSlider.minimumValue /= 2.2
+//            weightSlider.setValue(convertedWeight, animated: false)
+//        }
+//        weightLabel.text = String(format: "%.2f", convertedWeight)
     }
 
     /*
@@ -196,5 +201,28 @@ extension VolumeCalculatorViewController: UIPickerViewDataSource, UIPickerViewDe
 extension VolumeCalculatorViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 
+    }
+}
+
+extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeightCell", for: indexPath)
+            cell.textLabel?.text = "Weight"
+            cell.detailTextLabel?.text = "Lbs"
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell", for: indexPath)
+            cell.textLabel?.text = "Skill Level"
+            cell.detailTextLabel?.text = "Level"
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
 }
