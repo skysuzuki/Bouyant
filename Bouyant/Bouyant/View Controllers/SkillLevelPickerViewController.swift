@@ -1,21 +1,21 @@
 //
-//  WeightPickerViewController.swift
+//  SkillLevelPickerViewController.swift
 //  Bouyant
 //
-//  Created by Lambda_School_Loaner_204 on 11/16/20.
+//  Created by Lambda_School_Loaner_204 on 11/25/20.
 //
 
 import UIKit
 
-class WeightPickerViewController: UIViewController {
+class SkillLevelPickerViewController: UIViewController {
 
-    @IBOutlet weak var weightPicker: UIPickerView!
+    @IBOutlet weak var skillLevelPicker: UIPickerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        weightPicker.dataSource = self
-        weightPicker.delegate = self
+        skillLevelPicker.delegate = self
+        skillLevelPicker.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -32,45 +32,29 @@ class WeightPickerViewController: UIViewController {
 
 }
 
-extension WeightPickerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension SkillLevelPickerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
-        switch component {
-        case 0:
-            return (300 - 80)
-        case 1:
-            return 10
-        case 2:
-            return 2
-        default:
-            return 0
-        }
+        return GuildFactor.allCases.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-        switch component {
+        switch row {
         case 0:
-            for i in 80...300 {
-                return String(row + i)
-            }
+            return "Beginner"
         case 1:
-            for _ in 0...10 {
-                return ".\(row)"
-            }
+            return "Beginner/Intermediate"
         case 2:
-            if row == 0 {
-                return "lbs"
-            } else {
-                return "kgs"
-            }
+            return "Intermediate"
+        case 3:
+            return "Intermediate/Advanced"
+        case 4:
+            return "Advanced"
         default:
             return ""
         }
-        return nil
     }
 }

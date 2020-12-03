@@ -189,6 +189,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ncj-yo-eV1" kind="showDetail" identifier="SkillLevelSegue" id="eQh-Ip-DW2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -233,7 +236,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJG-tO-V2W">
-                                <rect key="frame" x="28" y="119" width="320" height="162"/>
+                                <rect key="frame" x="27.5" y="119" width="320" height="162"/>
                             </pickerView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTg-9L-jfd">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -262,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLM-Th-pUi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1503" y="750"/>
+            <point key="canvasLocation" x="1548" y="630"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9ll-sn-vU6">
@@ -340,6 +343,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfh-rQ-Blv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-178" y="750"/>
+        </scene>
+        <!--Skill Level Picker View Controller-->
+        <scene sceneID="cqv-Na-7RU">
+            <objects>
+                <viewController id="Ncj-yo-eV1" customClass="SkillLevelPickerViewController" customModule="Bouyant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ro4-Fz-QRc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Nz-Lc-1gH">
+                                <rect key="frame" x="27.5" y="119" width="320" height="162"/>
+                            </pickerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLt-L2-GLY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="Six-tw-Vad">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="vcc-3s-FQH"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="weR-OQ-aIK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="tLt-L2-GLY" secondAttribute="trailing" id="HJS-ID-XT2"/>
+                            <constraint firstItem="6Nz-Lc-1gH" firstAttribute="centerY" secondItem="Ro4-Fz-QRc" secondAttribute="centerY" id="Iqc-kI-Vgb"/>
+                            <constraint firstItem="6Nz-Lc-1gH" firstAttribute="centerX" secondItem="Ro4-Fz-QRc" secondAttribute="centerX" id="i0F-nd-jhc"/>
+                            <constraint firstItem="tLt-L2-GLY" firstAttribute="leading" secondItem="weR-OQ-aIK" secondAttribute="leading" id="pMx-oF-CcC"/>
+                            <constraint firstItem="tLt-L2-GLY" firstAttribute="top" secondItem="weR-OQ-aIK" secondAttribute="top" id="qbY-Iu-7tQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="o5K-7z-Viq"/>
+                    <size key="freeformSize" width="375" height="400"/>
+                    <connections>
+                        <outlet property="skillLevelPicker" destination="6Nz-Lc-1gH" id="MsR-Cg-nUa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkm-B7-e6A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1548" y="1082"/>
         </scene>
     </scenes>
     <resources>

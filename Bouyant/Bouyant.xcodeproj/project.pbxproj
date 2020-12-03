@@ -23,6 +23,7 @@
 		BB1F66DB2563280C00DA53E0 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66DA2563280C00DA53E0 /* SlideInPresentationManager.swift */; };
 		BB1F66E02563303300DA53E0 /* WeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66DF2563303300DA53E0 /* WeightPickerViewController.swift */; };
 		BB1F66E52563317400DA53E0 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F66E42563317400DA53E0 /* SlideInPresentationController.swift */; };
+		BB5D0B21256F493C00B88974 /* SkillLevelPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D0B20256F493C00B88974 /* SkillLevelPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		BB1F66DA2563280C00DA53E0 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
 		BB1F66DF2563303300DA53E0 /* WeightPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPickerViewController.swift; sourceTree = "<group>"; };
 		BB1F66E42563317400DA53E0 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
+		BB5D0B20256F493C00B88974 /* SkillLevelPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillLevelPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			children = (
 				BB1F664E252509CD00DA53E0 /* VolumeCalculatorViewController.swift */,
 				BB1F66DF2563303300DA53E0 /* WeightPickerViewController.swift */,
+				BB5D0B20256F493C00B88974 /* SkillLevelPickerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				BB1F66472525003700DA53E0 /* SurferController.swift in Sources */,
 				BB1F664F252509CD00DA53E0 /* VolumeCalculatorViewController.swift in Sources */,
 				BB1F660A2524D9B700DA53E0 /* SceneDelegate.swift in Sources */,
+				BB5D0B21256F493C00B88974 /* SkillLevelPickerViewController.swift in Sources */,
 				BB1F66632534E66300DA53E0 /* Surfboard+Convenience.swift in Sources */,
 				BB1F66E02563303300DA53E0 /* WeightPickerViewController.swift in Sources */,
 				BB1F66542526413300DA53E0 /* Surfer+Convenience.swift in Sources */,

@@ -170,6 +170,13 @@ class VolumeCalculatorViewController: UIViewController {
 
             destination.transitioningDelegate = slideInTransistionDelegate
             destination.modalPresentationStyle = .custom
+        } else if let destination = segue.destination as? SkillLevelPickerViewController {
+            if segue.identifier == "SkillLevelSegue" {
+                slideInTransistionDelegate.direction = .bottom
+            }
+
+            destination.transitioningDelegate = slideInTransistionDelegate
+            destination.modalPresentationStyle = .custom
         }
     }
 
