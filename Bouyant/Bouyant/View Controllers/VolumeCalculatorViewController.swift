@@ -33,7 +33,8 @@ class VolumeCalculatorViewController: UIViewController {
     private var surfboard: Surfboard?
     private var isLbs: Bool?
     private var calculateButton = UIButton()
-    private var skillLevel = "Level"
+    private var skillLabel = "Level"
+    private var weightLabel = "0.0"
 
     lazy var fetchedResultController: NSFetchedResultsController<Surfer> = {
         let fetchRequest: NSFetchRequest<Surfer> = Surfer.fetchRequest()
@@ -171,6 +172,7 @@ class VolumeCalculatorViewController: UIViewController {
 
             destination.transitioningDelegate = slideInTransistionDelegate
             destination.modalPresentationStyle = .custom
+            destination.weightDelegate = self
 
         } else if let destination = segue.destination as? SkillLevelPickerViewController {
             if segue.identifier == "SkillLevelSegue" {
@@ -231,12 +233,12 @@ extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSo
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "WeightCell", for: indexPath)
             cell.textLabel?.text = "Weight"
-            cell.detailTextLabel?.text = "Lbs"
+            cell.detailTextLabel?.text = weightLabel
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell", for: indexPath)
             cell.textLabel?.text = "Skill Level"
-            cell.detailTextLabel?.text = skillLevel
+            cell.detailTextLabel?.text = skillLabel
             return cell
         default:
             return UITableViewCell()
@@ -244,10 +246,15 @@ extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension VolumeCalculatorViewController: SkillLevelDelegate {
+extension VolumeCalculatorViewController: SkillLevelDelegate, WeightPickerDelegate {
     func skillChoice(skillLevel: GuildFactor, skillString: String) {
-        self.skillLevel = skillString
+        self.skillLabel = skillString
         surfer?.guildFactor = skillLevel.rawValue
+        self.informationTableView.reloadData()
+    }
+
+    func choseWeight(_ weight: Double) {
+        self.weightLabel = String(weight)
         self.informationTableView.reloadData()
     }
 }

@@ -12,11 +12,16 @@ enum weight: Int {
     case kgs
 }
 
+protocol WeightPickerDelegate {
+    func choseWeight(_ weight: Double)
+}
+
 class WeightPickerViewController: UIViewController {
 
     @IBOutlet weak var weightPicker: UIPickerView!
 
     var weightChoice = weight.kgs
+    var weightDelegate: WeightPickerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +31,9 @@ class WeightPickerViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewDidDisappear(_ animated: Bool) {
+        weightDelegate?.choseWeight(weightCalculationFromPicker())
+    }
     /*
     // MARK: - Navigation
 
@@ -36,6 +43,12 @@ class WeightPickerViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    private func weightCalculationFromPicker() -> Double {
+        let wholeNum = Double(weightPicker.selectedRow(inComponent: 0) + 80)
+        let decimal = Double(weightPicker.selectedRow(inComponent: 1)) * 0.10
+        return wholeNum + decimal
+    }
 
 }
 
