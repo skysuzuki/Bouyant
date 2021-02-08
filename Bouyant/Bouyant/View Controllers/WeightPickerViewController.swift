@@ -7,9 +7,16 @@
 
 import UIKit
 
+enum weight: Int {
+    case lbs
+    case kgs
+}
+
 class WeightPickerViewController: UIViewController {
 
     @IBOutlet weak var weightPicker: UIPickerView!
+
+    var weightChoice = weight.kgs
 
     override func viewDidLoad() {
         super.viewDidLoad()

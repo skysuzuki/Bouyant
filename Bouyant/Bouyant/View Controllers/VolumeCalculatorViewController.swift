@@ -33,6 +33,7 @@ class VolumeCalculatorViewController: UIViewController {
     private var surfboard: Surfboard?
     private var isLbs: Bool?
     private var calculateButton = UIButton()
+    private var skillLevel = "Level"
 
     lazy var fetchedResultController: NSFetchedResultsController<Surfer> = {
         let fetchRequest: NSFetchRequest<Surfer> = Surfer.fetchRequest()
@@ -170,6 +171,7 @@ class VolumeCalculatorViewController: UIViewController {
 
             destination.transitioningDelegate = slideInTransistionDelegate
             destination.modalPresentationStyle = .custom
+
         } else if let destination = segue.destination as? SkillLevelPickerViewController {
             if segue.identifier == "SkillLevelSegue" {
                 slideInTransistionDelegate.direction = .bottom
@@ -177,6 +179,8 @@ class VolumeCalculatorViewController: UIViewController {
 
             destination.transitioningDelegate = slideInTransistionDelegate
             destination.modalPresentationStyle = .custom
+            destination.skillLevelDelegate = self
+            destination.pickerRowIndex = GuildFactor.allCases.firstIndex(of: GuildFactor(rawValue: surfer!.guildFactor) ?? GuildFactor.Beginner)
         }
     }
 
@@ -232,10 +236,18 @@ extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSo
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell", for: indexPath)
             cell.textLabel?.text = "Skill Level"
-            cell.detailTextLabel?.text = "Level"
+            cell.detailTextLabel?.text = skillLevel
             return cell
         default:
             return UITableViewCell()
         }
+    }
+}
+
+extension VolumeCalculatorViewController: SkillLevelDelegate {
+    func skillChoice(skillLevel: GuildFactor, skillString: String) {
+        self.skillLevel = skillString
+        surfer?.guildFactor = skillLevel.rawValue
+        self.informationTableView.reloadData()
     }
 }

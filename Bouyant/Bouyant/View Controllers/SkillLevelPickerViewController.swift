@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol SkillLevelDelegate {
+    func skillChoice(skillLevel: GuildFactor, skillString: String)
+}
+
 class SkillLevelPickerViewController: UIViewController {
 
     @IBOutlet weak var skillLevelPicker: UIPickerView!
+
+    var skillLevelDelegate: SkillLevelDelegate?
+    var pickerRowIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +24,8 @@ class SkillLevelPickerViewController: UIViewController {
         skillLevelPicker.delegate = self
         skillLevelPicker.dataSource = self
         // Do any additional setup after loading the view.
+
+        skillLevelPicker.selectRow(pickerRowIndex ?? 0, inComponent: 0, animated: false)
     }
     
 
@@ -30,19 +39,14 @@ class SkillLevelPickerViewController: UIViewController {
     }
     */
 
-}
-
-extension SkillLevelPickerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    override func viewDidDisappear(_ animated: Bool) {
+        let index = skillLevelPicker.selectedRow(inComponent: 0)
+        skillLevelDelegate?.skillChoice(skillLevel: GuildFactor.allCases[index],
+                                        skillString: skillChoice(index))
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return GuildFactor.allCases.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch row {
+    private func skillChoice(_ index: Int) -> String {
+        switch index {
         case 0:
             return "Beginner"
         case 1:
@@ -56,5 +60,19 @@ extension SkillLevelPickerViewController: UIPickerViewDataSource, UIPickerViewDe
         default:
             return ""
         }
+    }
+}
+
+extension SkillLevelPickerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return GuildFactor.allCases.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return skillChoice(row)
     }
 }
