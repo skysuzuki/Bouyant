@@ -173,6 +173,7 @@ class VolumeCalculatorViewController: UIViewController {
             destination.transitioningDelegate = slideInTransistionDelegate
             destination.modalPresentationStyle = .custom
             destination.weightDelegate = self
+            destination.surfer = self.surfer
 
         } else if let destination = segue.destination as? SkillLevelPickerViewController {
             if segue.identifier == "SkillLevelSegue" {
@@ -253,8 +254,15 @@ extension VolumeCalculatorViewController: SkillLevelDelegate, WeightPickerDelega
         self.informationTableView.reloadData()
     }
 
-    func choseWeight(_ weight: Double) {
+    func choseWeight(_ weight: Float, _ lbsOrKg: Bool) {
         self.weightLabel = String(weight)
+        self.surfer?.weight = weight
+        if lbsOrKg {
+            self.weightLabel = self.weightLabel + " lbs"
+        } else {
+            self.weightLabel = self.weightLabel + " kgs"
+        }
+
         self.informationTableView.reloadData()
     }
 }

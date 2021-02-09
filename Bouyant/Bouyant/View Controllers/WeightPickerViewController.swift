@@ -7,21 +7,16 @@
 
 import UIKit
 
-enum weight: Int {
-    case lbs
-    case kgs
-}
-
 protocol WeightPickerDelegate {
-    func choseWeight(_ weight: Double)
+    func choseWeight(_ weight: Float, _ lbsOrKg: Bool)
 }
 
 class WeightPickerViewController: UIViewController {
 
     @IBOutlet weak var weightPicker: UIPickerView!
 
-    var weightChoice = weight.kgs
     var weightDelegate: WeightPickerDelegate?
+    var surfer: Surfer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,24 +24,24 @@ class WeightPickerViewController: UIViewController {
         weightPicker.dataSource = self
         weightPicker.delegate = self
         // Do any additional setup after loading the view.
+
+        guard let surfer = surfer else { return }
+        let decimalRow = Int(surfer.weight * 10) % 10
+        let wholeNumRow = Int(surfer.weight - (Float(decimalRow) * 0.10)) - 80
+        let lbsOrKgRow = surfer.isLbs ? 0 : 1
+        weightPicker.selectRow(wholeNumRow, inComponent: 0, animated: false)
+        weightPicker.selectRow(decimalRow, inComponent: 1, animated: false)
+        weightPicker.selectRow(lbsOrKgRow, inComponent: 2, animated: false)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        weightDelegate?.choseWeight(weightCalculationFromPicker())
+        weightDelegate?.choseWeight(weightCalculationFromPicker(),
+                                    (weightPicker.selectedRow(inComponent: 2) == 0))
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    private func weightCalculationFromPicker() -> Double {
-        let wholeNum = Double(weightPicker.selectedRow(inComponent: 0) + 80)
-        let decimal = Double(weightPicker.selectedRow(inComponent: 1)) * 0.10
+    private func weightCalculationFromPicker() -> Float {
+        let wholeNum = Float(weightPicker.selectedRow(inComponent: 0) + 80)
+        let decimal = Float(weightPicker.selectedRow(inComponent: 1)) * 0.10
         return wholeNum + decimal
     }
 
