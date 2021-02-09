@@ -101,33 +101,28 @@ class VolumeCalculatorViewController: UIViewController {
         calculateButton.addTarget(self, action: #selector(calculate), for: .touchUpInside)
         calculateButton.translatesAutoresizingMaskIntoConstraints = false
 
-//        NSLayoutConstraint.activate([
-//            calculateButton.topAnchor.constraint(equalTo: levelPicker.bottomAnchor, constant: 20),
-//            calculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            calculateButton.heightAnchor.constraint(equalToConstant: 50),
-//            calculateButton.widthAnchor.constraint(equalToConstant: 100)
-//        ])
+        NSLayoutConstraint.activate([
+            calculateButton.topAnchor.constraint(equalTo: informationTableView.bottomAnchor, constant: 20),
+            calculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            calculateButton.heightAnchor.constraint(equalToConstant: 50),
+            calculateButton.widthAnchor.constraint(equalToConstant: 100)
+        ])
     }
 
     @objc private func calculate(sender: UIButton) {
-//        guard let weightText = weightLabel.text,
-//              let weight = Float(weightText),
-//              let isLbs = isLbs,
-//              let surfer = surfer else { return }
-//
-//        let index = levelPicker.selectedRow(inComponent: 0)
-//        let guildFactor = GuildFactor.allCases[index]
-//
-//        let liters = guildFactor.rawValue * (isLbs ? (weight / 2.2) : weight)
-//
-//        if let surfboard = surfboard {
-//            surferController.updateSurfboard(for: surfboard, liters: liters)
-//        } else {
-//            surfboard = surferController.createSurfboard(liters: liters, surfer: surfer)
-//        }
-//        //liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
-//
-//        surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
+        guard let isLbs = isLbs,
+              let surfer = surfer else { return }
+
+        let liters = surfer.guildFactor * (isLbs ? (surfer.weight / 2.2) : surfer.weight)
+
+        if let surfboard = surfboard {
+            surferController.updateSurfboard(for: surfboard, liters: liters)
+        } else {
+            surfboard = surferController.createSurfboard(liters: liters, surfer: surfer)
+        }
+        //liters = surferController.calculateLiters(weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
+
+        //surferController.update(for: surfer, weight: weight, guildFactor: guildFactor.rawValue, isLbs: isLbs)
 
         updateViews()
     }
@@ -189,34 +184,6 @@ class VolumeCalculatorViewController: UIViewController {
 
 }
 
-// UIPicker DataSource/Delegate
-extension VolumeCalculatorViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return GuildFactor.allCases.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch row {
-        case 0:
-            return "Beginner"
-        case 1:
-            return "Beginner/Intermediate"
-        case 2:
-            return "Intermediate"
-        case 3:
-            return "Intermediate/Advanced"
-        case 4:
-            return "Advanced"
-        default:
-            return ""
-        }
-    }
-}
-
 // NSFetchedResultsControllerDelegate
 extension VolumeCalculatorViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -224,6 +191,7 @@ extension VolumeCalculatorViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+// UITableView Delegate/DataSource
 extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -247,6 +215,7 @@ extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
+// protocol delegates for SkillPickerView and WeightPickerView
 extension VolumeCalculatorViewController: SkillLevelDelegate, WeightPickerDelegate {
     func skillChoice(skillLevel: GuildFactor, skillString: String) {
         self.skillLabel = skillString

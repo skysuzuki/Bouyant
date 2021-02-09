@@ -200,20 +200,14 @@
                                     <outlet property="delegate" destination="y0h-sk-3dx" id="9Bh-XO-n0T"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYf-tq-TiH">
-                                <rect key="frame" x="164.5" y="442" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pXc-rk-yN6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eYf-tq-TiH" firstAttribute="centerX" secondItem="SAy-4m-TkT" secondAttribute="centerX" id="KrG-9C-hwA"/>
                             <constraint firstItem="htm-RF-Mbs" firstAttribute="leading" secondItem="pXc-rk-yN6" secondAttribute="leading" id="Sv8-TO-Tlw"/>
                             <constraint firstItem="htm-RF-Mbs" firstAttribute="top" secondItem="dBr-Gk-5uA" secondAttribute="bottom" constant="100" id="Sz1-3g-oce"/>
                             <constraint firstItem="dBr-Gk-5uA" firstAttribute="top" secondItem="pXc-rk-yN6" secondAttribute="top" constant="50" id="bM5-MO-pHc"/>
                             <constraint firstItem="dBr-Gk-5uA" firstAttribute="centerX" secondItem="SAy-4m-TkT" secondAttribute="centerX" id="hju-UG-pnu"/>
-                            <constraint firstItem="eYf-tq-TiH" firstAttribute="top" secondItem="htm-RF-Mbs" secondAttribute="bottom" constant="50" id="nNw-sg-QkZ"/>
                             <constraint firstItem="pXc-rk-yN6" firstAttribute="trailing" secondItem="htm-RF-Mbs" secondAttribute="trailing" id="rxz-yg-lDj"/>
                         </constraints>
                     </view>
