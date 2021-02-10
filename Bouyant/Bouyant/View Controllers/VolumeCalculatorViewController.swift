@@ -32,9 +32,9 @@ class VolumeCalculatorViewController: UIViewController {
 
     private var surfboard: Surfboard?
     private var isLbs: Bool?
+    private var skillLabel: String?
+    private var weightLabel: String?
     private var calculateButton = UIButton()
-    private var skillLabel = "Level"
-    private var weightLabel = "0.0"
 
     lazy var fetchedResultController: NSFetchedResultsController<Surfer> = {
         let fetchRequest: NSFetchRequest<Surfer> = Surfer.fetchRequest()
@@ -81,7 +81,17 @@ class VolumeCalculatorViewController: UIViewController {
     }
 
     private func updateSurferViews() {
-        self.isLbs = surfer!.isLbs
+        self.isLbs = surfer?.isLbs
+        self.weightLabel = String(surfer!.weight)
+        if let isLbs = isLbs {
+            if isLbs {
+                self.weightLabel = self.weightLabel! + " lbs"
+            }
+            else {
+                self.weightLabel = self.weightLabel! + " kg"
+            }
+        }
+        self.skillLabel = surferController.guildFactorString(guildFactor: GuildFactor(rawValue: surfer!.guildFactor)!)
 //        if !surfer!.isLbs && lbskgsSegmentedControl.selectedSegmentIndex != 1 {
 //            lbskgsSegmentedControl.selectedSegmentIndex = 1
 //            weightSlider.maximumValue /= 2.2
@@ -202,12 +212,12 @@ extension VolumeCalculatorViewController: UITableViewDelegate, UITableViewDataSo
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "WeightCell", for: indexPath)
             cell.textLabel?.text = "Weight"
-            cell.detailTextLabel?.text = weightLabel
+            cell.detailTextLabel?.text = weightLabel ?? "80.0 lbs"
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell", for: indexPath)
             cell.textLabel?.text = "Skill Level"
-            cell.detailTextLabel?.text = skillLabel
+            cell.detailTextLabel?.text = skillLabel ?? "Beginner"
             return cell
         default:
             return UITableViewCell()
@@ -227,9 +237,9 @@ extension VolumeCalculatorViewController: SkillLevelDelegate, WeightPickerDelega
         self.weightLabel = String(weight)
         self.surfer?.weight = weight
         if lbsOrKg {
-            self.weightLabel = self.weightLabel + " lbs"
+            self.weightLabel = self.weightLabel! + " lbs"
         } else {
-            self.weightLabel = self.weightLabel + " kgs"
+            self.weightLabel = self.weightLabel! + " kgs"
         }
 
         self.informationTableView.reloadData()

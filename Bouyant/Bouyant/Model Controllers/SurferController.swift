@@ -64,4 +64,19 @@ class SurferController {
     func calculateLiters(weight: Float, guildFactor: Float, isLbs: Bool = true) -> Float {
         return guildFactor * (isLbs ? (weight / lbsToKgs) : weight)
     }
+
+    func guildFactorString(guildFactor: GuildFactor) -> String {
+        switch guildFactor {
+        case .Beginner:
+            return "Beginner"
+        case .BegInter:
+            return "Beginner/Intermediate"
+        case .Intermediate:
+            return "Intermediate"
+        case .InterAdv:
+            return "Intermediate/Advanced"
+        case .Advanced:
+            return "Advanced"
+        }
+    }
 }
