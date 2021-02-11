@@ -82,13 +82,12 @@ class VolumeCalculatorViewController: UIViewController {
 
     private func updateSurferViews() {
         self.isLbs = surfer?.isLbs
-        self.weightLabel = String(surfer!.weight)
         if let isLbs = isLbs {
             if isLbs {
-                self.weightLabel = self.weightLabel! + " lbs"
+                self.weightLabel = "\(surfer!.weight) lbs"
             }
             else {
-                self.weightLabel = self.weightLabel! + " kg"
+                self.weightLabel = "\(surfer!.weight) kg"
             }
         }
         self.skillLabel = surferController.guildFactorString(guildFactor: GuildFactor(rawValue: surfer!.guildFactor)!)
@@ -234,12 +233,12 @@ extension VolumeCalculatorViewController: SkillLevelDelegate, WeightPickerDelega
     }
 
     func choseWeight(_ weight: Float, _ lbsOrKg: Bool) {
-        self.weightLabel = String(weight)
         self.surfer?.weight = weight
+        
         if lbsOrKg {
-            self.weightLabel = self.weightLabel! + " lbs"
+            self.weightLabel = "\(weight) lbs"
         } else {
-            self.weightLabel = self.weightLabel! + " kgs"
+            self.weightLabel = "\(weight) kg"
         }
 
         self.informationTableView.reloadData()
